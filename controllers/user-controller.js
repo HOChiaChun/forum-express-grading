@@ -1,7 +1,6 @@
 const bcrypt = require('bcryptjs')
 const { User, Comment, Restaurant, Favorite, Like, Followship } = require('../models')
 const { imgurFileHandler } = require('../helpers/file-helpers')
-const user = require('../models/user')
 
 const userController = {
   signUpPage: (req, res) => {
@@ -216,3 +215,6 @@ const userController = {
 
 }
 module.exports = userController
+
+const name = 'AlphaPhoneX'
+console.log(name.toLowerCase())
