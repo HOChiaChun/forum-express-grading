@@ -49,6 +49,7 @@ const restController = {
         return restaurant.increment('view_counts')
       })
       .then(restaurant => {
+        if (!restaurant) throw new Error("Restaurant didn't exist!")
         const isFavorited = restaurant.FavoritedUsers.some(f => f.id === req.user.id)
         const isLiked = restaurant.LikedUsers.some(l => l.id === req.user.id)
         return res.render('restaurant', { restaurant: restaurant.toJSON(), isFavorited, isLiked })
