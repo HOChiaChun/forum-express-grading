@@ -215,6 +215,3 @@ const userController = {
 
 }
 module.exports = userController
-
-const name = 'AlphaPhoneX'
-console.log(name.toLowerCase())
