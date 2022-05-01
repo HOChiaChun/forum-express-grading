@@ -3,19 +3,62 @@
   <div class="card-body">
     <h5 class="card-title">{{user.name}}</h5>
     <p class="card-text">{{user.email}}</p>
+  <div>
     <p class="card-text">{{user.Comments.length}} 已評論餐廳</p>
+    <p class="card-text">{{user.FavoritedRestaurants.length}} 收藏的餐廳</p>
+    <p class="card-text">{{user.Followers.length}} followings(追蹤者)</p>
+    <p class="card-text">{{user.Followings.length}} followers(追蹤者)</p>
+  </div>
     <a href="/users/{{user.id}}/edit">
       <button type="submit" class="btn btn-primary" style="margin-top: 30px;">edit</button>
     </a>
   </div>
 </div>
 <div class="card mb-3">
-  <div class="card-body">
-    <p>{{user.Comments.length}} 已評論餐廳</p>
-  </div>
-  <div class="card-body">
-    {{#each user.Comments}}
-    <img style="height: 100px; margin: 10px;" src="{{this.Restaurant.image}}" alt="沒有圖！" srcset="">
-    {{/each}}
+  <div style="display: flex; margin: 20px;">
+    <div>
+      <div class="card mb-3" style="display: inline-block; width: 400px;">
+        <div class="card-body">
+          <p>{{user.Followers.length}} followings(追蹤者)</p>
+        </div>
+        <div class="card-body" style="display: flex;">
+          {{#each user.Followers}}
+          <img style="height: 100px; margin: 10px;" src="{{this.image}}" alt="沒有圖！" srcset="">
+          {{/each}}
+        </div>
+      </div>
+      <div class="card mb-3" style="display: inline-block; width: 400px;">
+        <div class="card-body">
+          <p>{{user.Followings.length}} followers(追蹤者)</p>
+        </div>
+        <div class="card-body" style="display: flex;">
+          {{#each user.Followings}}
+          <img style="height: 100px; margin: 10px;" src="{{this.image}}" alt="沒有圖！" srcset="">
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="card mb-3" style="display: inline-block; width: 800px;">
+        <div class="card-body">
+          <p>{{user.Comments.length}} 已評論餐廳</p>
+        </div>
+        <div class="card-body">
+          {{#each user.Comments}}
+          <img style="height: 100px; margin: 10px;" src="{{this.Restaurant.image}}" alt="沒有圖！" srcset="">
+          {{/each}}
+        </div>
+      </div>
+      <div class="card mb-3" style="display: inline-block; width: 800px;">
+        <div class="card-body">
+          <p>{{user.FavoritedRestaurants.length}} 收藏的餐廳</p>
+        </div>
+        <div class="card-body">
+          {{#each user.FavoritedRestaurants}}
+          <img style="height: 100px; margin: 10px;" src="{{this.image}}" alt="沒有圖！" srcset="">
+          {{/each}}
+        </div>
+      </div>
+    </div>
   </div>
 </div>
