@@ -63,6 +63,7 @@ const restController = {
       include: Category
     })
       .then(restaurant => {
+        if (!restaurant) throw new Error("Restaurant didn't exist!")
         res.render('dashboard', { restaurant })
       })
       .catch(err => next(err))

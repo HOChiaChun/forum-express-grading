@@ -1,7 +1,6 @@
 const bcrypt = require('bcryptjs')
 const { User, Comment, Restaurant, Favorite, Like, Followship } = require('../models')
 const { imgurFileHandler } = require('../helpers/file-helpers')
-const { unsubscribe } = require('../app')
 
 const userController = {
   signUpPage: (req, res) => {
@@ -52,17 +51,16 @@ const userController = {
       .then(user => {
         if (!user) throw new Error("User didn't exist!")
         const allComments = user.Comments
-        const resultId = new Set()
-        allComments.map(uC =>
-          resultId.add(uC.toJSON().Restaurant.id)
-        )
-        const resultImage = new Set()
-        allComments.map(uC =>
-          resultImage.add(uC.toJSON().Restaurant.image)
-        )
-        const userCommentedLength = Array.from(resultId)
-        const userCommentedImage = Array.from(resultImage)
-        res.render('users/profile', { user: user.toJSON(), userCommentedLength, userCommentedImage })
+        const restaurantIdList = new Set()
+        const showRestaurants = allComments.reduce((accumulator, uC) => {
+          const restaurant = uC.toJSON().Restaurant
+          if (!restaurantIdList.has(restaurant.id)) {
+            accumulator.push(restaurant)
+            restaurantIdList.add(restaurant.id)
+          }
+          return accumulator
+        }, [])
+        res.render('users/profile', { user: user.toJSON(), showRestaurants })
       })
       .catch(err => next(err))
   },
